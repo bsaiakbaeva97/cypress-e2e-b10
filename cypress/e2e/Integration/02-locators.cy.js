@@ -94,29 +94,25 @@ describe("CSS Locators", () => {
 
 
   it('Locating the element using Attribute Selectors', () => {
+    cy.visit("https://www.techglobal-training.com/frontend/html-elements");
 
     // These are proper way to locate the class and id
     cy.get('#checkbox-button-group')
     cy.get('.checkbox')
 
-    cy.visit("https://www.techglobal-training.com/frontend/html-elements");
 
     cy.get('[id="checkbox-button-group"]')
-    cy.get('[class="class"]')
+    // cy.get('[class="class"]')
 
     cy.get('[data-identifier="Headings"]')
     cy.get('[value="Apple"]')
     cy.get('[type="checkbox"]')
 
-    cy.get('#company_dropdown1 > option[value="Apple"]')
-    cy.get('[id="company_dropdown1]  > option[value="Apple"]')
+    // cy.get('#company_dropdown1 > option[value="Apple"]')
+    // cy.get('[id="company_dropdown1] > option[value="Apple"]')
   })
 
   it('Test Case', () => {
-
-    cy.visit('https://techglobal-training.com/frontend/dynamic-elements');
-
-    cy.get('[id*=box_]');
 
   /**
    * TEST CASE 1
@@ -129,6 +125,49 @@ describe("CSS Locators", () => {
    * Locate the below box is displayed
    * Box 2
    */
+
+
+
+  /**
+   * @example:
+   * [class="className"] 
+   * [id="idName"]
+   * [value="Apple"]
+   * 
+   * [id="box_1_xCfW"]
+   *
+   * contains     => [id*="box_1_"]
+   * starts-with  => [id^="box_1_"]
+   * ends-with    => [id$="box_1_"]
+   */
+
+  cy.visit('https://techglobal-training.com/frontend/dynamic-elements')
+
+  cy.get('[id^="box_1_"]').should('be.visible')
+  cy.get('[id*="box_2_"]').should('be.visible')
+
+  // cy.get('[id^="box_1_"], [id*="box_2_"]')
+
+  // cy.get('[id^="box_"]')
+  })
+
+  it('Pseudo Classes', () => {
+
+    cy.visit("https://www.techglobal-training.com/frontend/html-elements")
+
+    cy.get('#ordered_list > li:first-child')
+    cy.get('#ordered_list > li:last-child')
+    cy.get('#ordered_list > li:nth-child(2)')
+
+    // cy.get('input:checked')
+
+    cy.get('#microsoft_check input').check()
+
+    cy.get('input:checked')
+
+    cy.get('input:not(#checkbox_1)')
+    cy.get('input:not(input:checked)')
+
+    cy.get('.checkbox:where(#apple_check, #microsoft_check)')
   })
 });
-
