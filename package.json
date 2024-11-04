@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-
     "test": "npx cypress run",
     "test:open": "npx cypress open",
     "test:config": "npm t -- --browser chrome --config viewportHeight=720,viewportWidth=1080 --headed"
