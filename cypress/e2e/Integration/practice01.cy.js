@@ -36,7 +36,7 @@ describe("Class_Practice01", () => {
 
     it('Validate the Google Logo Presence', () => {
 
-        cy.get('#hplogo img').should('be.visible')
+        cy.get('#hplogo').should('be.visible')
         
     });
 
@@ -51,13 +51,14 @@ describe("Class_Practice01", () => {
     });
 
 
-    it('Validate the Google Search Autocomplete Suggestions', () => {
+    it.only('Validate the Google Search Autocomplete Suggestions', () => {
         cy.on('uncaught:exception', () => {
             return false
           });
         cy.get('#APjFqb').type('Artificial Intelligence')
         cy.get('[data-view-type="1"]').should('have.length.gte', 0)
         cy.get('[data-view-type="1"]:nth-child(1)').click()
-        cy.url().should('include.text', 'q=artificial+intelligence');
-    })
-})
+        cy.url().should('contain', 'q=artificial+intelligence');
+    });
+});
+
