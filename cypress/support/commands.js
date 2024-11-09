@@ -15,8 +15,8 @@ Cypress.Commands.add('clickCard', (link) => {
     cy.contains(".card", link).click();
   })
 
-  Cypress.Commands.add('selectDropdownOption', (locator, option) => {
-    cy.get(locator).select(option);
+Cypress.Commands.add('selectDropdownOption', (locator, option) => {
+  cy.get(locator).select(option);
   })
 
   /**

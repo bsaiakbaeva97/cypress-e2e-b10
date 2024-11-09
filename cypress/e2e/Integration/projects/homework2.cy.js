@@ -1,9 +1,10 @@
 /// <reference types="cypress"/>
 
 describe('Login Function', () => {
-    beforeEach(() => {
-        cy.visit('frontend/project-2');
-      });
+
+  beforeEach(() => {
+    cy.visit('https://techglobal-training.com/frontend/project-2')
+});
 
     /*
     Navigate to https://techglobal-training.com/frontend/project-2
@@ -19,38 +20,44 @@ describe('Login Function', () => {
     Validate the “Forgot Password?” link is displayed
     Validate that the “Forgot Password?” link is clickable
     Validate that the link text is “Forgot Password?”
-     */
+    */
 
-    const credentials = ['#username', '#password']
-    const data = ['TechGlobal', 'Test1234']
     
     it('Test Case 01 - Validate the login form', () => {
 
-      
-      const buttons = ['[for="username"]','[for="password"]', '#login_btn','[href="/frontend/project-2"]' ]
-      const expectedText = ['Please enter your username', 'Please enter your password', 'LOGIN', 'Forgot Password?', ]
-
-      cy.wrap(credentials).each(($ele) => {
-        cy.get($ele)
+      cy.get('div > input').each(($ele) => {
+        cy.wrap($ele)
         .should('be.visible')
         .and('not.have.attr', 'required')
       });
 
-      cy.wrap(buttons).each(($ele, index) => {
-        cy.get($ele)
+      const expectedText = [
+        'Please enter your username',
+        'Please enter your password' 
+      ];
+
+      cy.get('div > label').each(($ele, index) => {
+        cy.wrap($ele)
         .should('have.text', expectedText[index])
 
       });
 
-      cy.get('#login_btn, [href="/frontend/project-2"]').each(($ele) => {
-      cy.get($ele)
-      .should('be.visible')
-      .and('not.be.disabled');
-      })
 
-    })
+      cy.get('#login_btn')
+      .should('be.visible')
+      .and('not.be.disabled')
+      .and('have.text', 'LOGIN');
+
+      cy.get('#login_btn')
+      .next()
+      .should('be.visible')
+      .and('not.be.disabled')
+      .and('have.text', 'Forgot Password?');
+
+      });
 
     it('Test Case 02 - Validate the valid login', () => {
+
       /*
        Navigate to https://techglobal-training.com/frontend/project-2
       Enter the username as “TechGlobal”
@@ -60,13 +67,17 @@ describe('Login Function', () => {
       Validate the logout button displayed with the text “LOGOUT”
        */
 
-      cy.wrap(credentials).each((ele, index) => {
-        cy.get(ele).clear().type(data[index])
-      })
+      const credentials = ['TechGlobal', 'Test1234'];
+
+      cy.get('div > input').each(($ele, index) => {
+        cy.wrap($ele).type(credentials[index]);
+      });
 
       cy.get('#login_btn').click();
-      cy.get('#success_lgn').should('be.visible').and('have.text', 'You are logged in');
-      cy.get('#logout').should('be.visible').and('have.text', 'LOGOUT');
+
+      cy.get('#success_lgn').should('have.text', 'You are logged in');
+
+      cy.get('#logout').should('have.text', 'LOGOUT');
         
     });
 
@@ -80,15 +91,17 @@ describe('Login Function', () => {
         Click on the “LOGOUT” button
         Validate that the login form is displayed
         */
-        cy.wrap(credentials).each((ele, index) => {
-          cy.get(ele).clear().type(data[index])
-        })
+        const credentials = ['TechGlobal', 'Test1234'];
 
-        cy.get('#login_btn, #logout').each((ele) => {
-          cy.wrap(ele).click()
+        cy.get('div > input').each(($ele, index) => {
+          cy.wrap($ele).type(credentials[index]);
         });
-        
-        cy.get('.pb-4').should('be.visible');
+
+        cy.get('#login_btn').click();
+
+        cy.get('#logout').click();
+
+        cy.get('.m-auto form').should('be.visible');
     });
 
     it('Test Case 04 - Validate the Forgot Password? Link and Reset Password modal', () => {
@@ -106,15 +119,18 @@ describe('Login Function', () => {
 
 
       const buttonWithMessage = ['#email', '#submit', '#modal_title', '.delete'];
-      const expcText = ["Enter your email address and we'll send you a link to reset your password. ", 'SUBMIT'];
+      const expcText = ["Enter your email address and we'll send you a link to reset your password. ", 'SUBMIT', 'Reset Password'];
 
       cy.get('#login_btn + a').click();
+
+      cy.get(buttonWithMessage[2]).should('have.text', expcText[2]);
 
       cy.wrap(buttonWithMessage).each((ele) => {
         cy.get(ele)
         .should('be.visible')
       })
 
+      
       cy.get(buttonWithMessage[0]).parent().should('have.text', expcText[0])
 
       cy.get(buttonWithMessage[1]).should('be.enabled').parent().and('have.text', expcText[1])
@@ -176,8 +192,8 @@ describe('Login Function', () => {
       Click on the “LOGIN” button
       Validate the failure message is displayed as “Invalid Username entered!” above the form
       */
-      cy.get(credentials[0]).type('John');
-      cy.get(credentials[1]).type(data[1]);
+      cy.get('#username').type('John');
+      cy.get('#password').type('Test1234');
       cy.get('#login_btn').click();
       cy.get('#error_message').should('be.visible').and('have.text', 'Invalid Username entered!')
     });
@@ -192,8 +208,8 @@ describe('Login Function', () => {
       Click on the “LOGIN” button
       Validate the failure message is displayed as “Invalid Password entered!” above the form
       */
-      cy.get(credentials[0]).type(data[0]);
-      cy.get(credentials[1]).type('1234');
+      cy.get('#username').type('TechGlobal');
+      cy.get('#password').type('1234');
       cy.get('#login_btn').click();
       cy.get('#error_message').should('be.visible').and('have.text', 'Invalid Password entered!')
     });
@@ -214,4 +230,9 @@ describe('Login Function', () => {
       cy.get('#error_message').should('be.visible').and('have.text', 'Invalid Username entered!')
     });
 
-  })
+
+    
+
+  });
+
+
