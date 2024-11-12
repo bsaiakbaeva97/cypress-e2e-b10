@@ -92,9 +92,7 @@ Cabin Class: Business
 
         bookingPage.getDropDownPassenger1().select('Senior (65+)');
 
-        bookingPage.getDatePicker1().click();
-
-        bookingPage.getDatePickerDay().contains(bookingPage.getNextWeekDate()).click();
+        bookingPage.getDatePicker1().clear().type(bookingPage.getNextWeekDate());
 
         bookingPage.getBookButton().click();
 
@@ -149,15 +147,9 @@ Cabin Class: Business
 
         bookingPage.getDropDownPassenger1().select('Adult (16-64)');
 
-        bookingPage.getDatePicker1().click();
+        bookingPage.getDatePicker1().clear().type(bookingPage.getNextWeekDate());
 
-        bookingPage.getDatePickerDay().contains(bookingPage.getNextWeekDate()).click();
-
-        bookingPage.getDatePicker2().click();
-
-        bookingPage.getDateNavBtn().click();
-
-        bookingPage.getDatePickerDay().contains(bookingPage.getNextMonthDate()).click();
+        bookingPage.getDatePicker2().clear().type(bookingPage.getNextMonthDate());
 
         bookingPage.getBookButton().click();       
 
@@ -217,9 +209,7 @@ Cabin Class: Premium Economy
 
         bookingPage.getDropDownPassenger2().select('Child (2-11)');
 
-        bookingPage.getDatePicker1().click();
-
-        bookingPage.getDatePickerDay().contains(bookingPage.getNextDay()).click();
+        bookingPage.getDatePicker1().clear().type(bookingPage.getNextDay());
 
         bookingPage.getBookButton().click();
 
@@ -232,6 +222,9 @@ Cabin Class: Premium Economy
         bookingPage.getFlightDetails().each(($ele, index) => {
             cy.wrap($ele).should('have.text', text[index])
         });
+
+        
+
 
     })
 })

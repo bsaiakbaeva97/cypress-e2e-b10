@@ -68,42 +68,38 @@ class BookingPage extends BasePage {
 
     getNextWeekDate() {
         const today = new Date();  
-        today.setDate(today.getDate() + 7);  
-        
-        const day = String(today.getDate()); 
+        today.setDate(today.getDate() + 7); 
 
-        return day;  
+        const day = String(today.getDate()).padStart(2, '0'); 
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+
+        return `${month}/${day}/${year}`; 
     }
 
     getNextDay() {
         const today = new Date();  
-        today.setDate(today.getDate() + 1);  
-        
-        const day = String(today.getDate()); 
-        return day;
-    }
+        today.setDate(today.getDate() + 1); 
 
-    getCurrenMonth() {
-        cy.get('react-datepicker__current-month').invoke('text')
+        const day = String(today.getDate()).padStart(2, '0'); 
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+
+        return `${month}/${day}/${year}`; 
     }
 
     getNextMonthDate() {
         const today = new Date(); 
         const currentMonth = today.getMonth();
         
-        today.setMonth(currentMonth + 1);
+        today.setMonth(currentMonth + 1); 
         
-        const day = String(today.getDate());  
-        
-        return day;  
-    }
-
-    getDatePickerDay() {
-        return cy.get('.react-datepicker__day');
-    }
-
-    getDateNavBtn() {
-        return cy.get('[aria-label="Next Month"]');
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0'); 
+        const year = today.getFullYear();
+    
+        return `${month}/${day}/${year}`;
+     
     }
 
     getInfoDepartReturn() {
@@ -117,6 +113,12 @@ class BookingPage extends BasePage {
     getFlightDetails() {
         return cy.get('.mt-4 > p');
     }
+
+    getDynamicDay() {
+        cy.get('is-italic + p');
+    };
+
+
 }
 
 
