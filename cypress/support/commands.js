@@ -11,31 +11,17 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+//
+
 Cypress.Commands.add('clickCard', (link) => {
-    cy.contains(".card", link).click();
-  })
+  cy.contains('.card, [class*="projectCard"]', link).click()
+})
 
 Cypress.Commands.add('selectDropdownOption', (locator, option) => {
-  cy.get(locator).select(option);
-  })
+  cy.get(locator).select(option)
+})
 
-  /**
- * Create a Cypress function that will name 'login'
- * 
- * This function will get 2 arguments ( email, and name )
- * 
- * It will enter the user email on Focus section and click on the submit button
- */
-
-  Cypress.Commands.add('clickCard', (link) => {
-    cy.contains(".card", link).click();
-  })
-  
-  Cypress.Commands.add('selectDropdownOption', (locator, option) => {
-    cy.get(locator).select(option)
-  })
-
-  /**
+/**
  * Create a Cypress function that will name 'login'
  * 
  * This function will get 2 arguments ( email, and name )
@@ -44,39 +30,41 @@ Cypress.Commands.add('selectDropdownOption', (locator, option) => {
  */
 
 Cypress.Commands.add('login', (email, name) => {
-  cy.get('[name="email"]').type(email);
-  cy.get('.mb-3 > input').clear().type(name);
-  cy.get('.mb-3 + button').click();
-});
+  cy.get('[name="email"]').type(email)
+  cy.get('.mb-3 > input').clear().type(name)
+  cy.get('.mb-3 + button').click()
+})
 
 // Create a method that will validate the text of the web element
 
 Cypress.Commands.add('textValidator', (locator, text) => {
-  cy.get(locator).should('have.text', text);
-});
+  cy.get(locator).should('have.text', text)
+})
 
-  // /**
-  //  * Adds two numbers together.
-  //  * 
-  //  * @param {number} a - The first number.
-  //  * @param {number} b - The second number
-  //  * @returns {number} - The sum of the two numbers.
-  //  * 
-  //  * 
-  //  * @example
-  //  * // Returns 5
-  //  * add(2, 3)
-  //  * 
-  //  *  * @example
-  //  * // Returns 10
-  //  * add(7, 3)
-  //  */
-  // export function add(a, b) {
-  //   return a + b;
-  // }
-  
-  // add('tech', 'global')
-//
+// cy.textValidator('#main_heading', 'HTML Elements')
+
+// /**
+//  * Adds two numbers together.
+//  * 
+//  * @param {number} a - The first number.
+//  * @param {number} b - The second number
+//  * @returns {number} - The sum of the two numbers.
+//  * 
+//  * 
+//  * @example
+//  * // Returns 5
+//  * add(2, 3)
+//  * 
+//  *  * @example
+//  * // Returns 10
+//  * add(7, 3)
+//  */
+// export function add(a, b) {
+//   return a + b;
+// }
+
+// add('tech', 'global')
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
@@ -111,6 +99,8 @@ Cypress.Commands.add('assertAttribute', { prevSubject: 'element' } ,(subject, at
   }
   
 })
+
+//
 // -- This is a dual command --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
 //

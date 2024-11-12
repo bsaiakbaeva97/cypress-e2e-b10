@@ -1,9 +1,9 @@
-import BasePage from "./BasePage"
+import BasePage from './BasePage'
 
 class TablePage extends BasePage {
-    getHeaders() {
-        return cy.get('.header')
-      }
+  getHeaders() {
+    return cy.get('.header')
+  }
 }
 
 export default TablePage

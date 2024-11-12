@@ -23,42 +23,42 @@ TASK-4: Validate the Google Search Autocomplete Suggestions
 
 */
 
-describe("Class_Practice01", () => {
-    beforeEach(() => {
-        cy.visit('https://www.google.com/')
-    })
+describe('Class_Practice01', () => {
+  beforeEach(() => {
+    cy.visit('https://www.google.com/')
+  })
 
-    it('Validate the Google Home Page Title and URL', () => {
+  it('Validate the Google Home Page Title and URL', () => {
 
-        cy.title().should('eq', 'Google')
-        cy.url().should('eq', 'https://www.google.com/')
-    });
+    cy.title().should('eq', 'Google')
+    cy.url().should('eq', 'https://www.google.com/')
+  })
 
-    it('Validate the Google Logo Presence', () => {
+  it('Validate the Google Logo Presence', () => {
 
-        cy.get('#hplogo').should('be.visible')
+    cy.get('#hplogo').should('be.visible')
         
-    });
+  })
 
     
-    it('Validate the Google Search Results', () => {
-        cy.on('uncaught:exception', () => {
-            return false
-          });
-        cy.get('#APjFqb').type('Cypress{enter}')
-        cy.get('.dURPMd > div').should('have.length.gte', 0)
+  it('Validate the Google Search Results', () => {
+    cy.on('uncaught:exception', () => {
+      return false
+    })
+    cy.get('#APjFqb').type('Cypress{enter}')
+    cy.get('.dURPMd > div').should('have.length.gte', 0)
         
-    });
+  })
 
 
-    it.only('Validate the Google Search Autocomplete Suggestions', () => {
-        cy.on('uncaught:exception', () => {
-            return false
-          });
-        cy.get('#APjFqb').type('Artificial Intelligence')
-        cy.get('[data-view-type="1"]').should('have.length.gte', 0)
-        cy.get('[data-view-type="1"]:nth-child(1)').click()
-        cy.url().should('contain', 'q=artificial+intelligence');
-    });
-});
+  it.only('Validate the Google Search Autocomplete Suggestions', () => {
+    cy.on('uncaught:exception', () => {
+      return false
+    })
+    cy.get('#APjFqb').type('Artificial Intelligence')
+    cy.get('[data-view-type="1"]').should('have.length.gte', 0)
+    cy.get('[data-view-type="1"]:nth-child(1)').click()
+    cy.url().should('contain', 'q=artificial+intelligence')
+  })
+})
 
