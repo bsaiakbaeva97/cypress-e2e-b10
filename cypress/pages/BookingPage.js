@@ -83,10 +83,15 @@ class BookingPage extends BasePage {
         return day;
     }
 
+    getCurrenMonth() {
+        cy.get('react-datepicker__current-month').invoke('text')
+    }
 
     getNextMonthDate() {
-        const today = new Date();  
-        today.setDate(today.getMonth() + 1);  
+        const today = new Date(); 
+        const currentMonth = today.getMonth();
+        
+        today.setMonth(currentMonth + 1);
         
         const day = String(today.getDate());  
         
